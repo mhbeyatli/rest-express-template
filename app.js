@@ -2,9 +2,18 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const MONGO_PW = require('./config');
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+
+mongoose.connect(`mongodb+srv://${MONGO_PW}:habib_beyatli@express-rest.mnpwi.mongodb.net/<dbname>?retryWrites=true&w=majority`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+
+
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
