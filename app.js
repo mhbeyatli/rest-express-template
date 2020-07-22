@@ -3,12 +3,13 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const MONGO_PW = require('./config');
+const config = require('./config');
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const userRoutes = require('./api/routes/user');
 
-mongoose.connect(`mongodb+srv://${MONGO_PW}:habib_beyatli@express-rest.mnpwi.mongodb.net/<dbname>?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://${config.MONGO_PW}:habib_beyatli@express-rest.mnpwi.mongodb.net/rest-example?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 
 app.use('/products', productRoutes)
 app.use('/orders', orderRoutes)
+app.use('/user', userRoutes)
 
 app.use((req, res, next) => {
   const error = new Error('Not found smt like that');

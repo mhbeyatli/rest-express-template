@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const Product = require('../models/product')
 
 router.get('/', (req, res, next) => {
-
   Product
     .find()
     .exec()
@@ -17,18 +16,15 @@ router.get('/', (req, res, next) => {
       console.log(err)
       res.status(500).json({error: err})
     })
-  res.status(200).json({
-    message: 'Handling GET request to /products'
-  });
 });
 
 router.post('/', (req, res, next) => {
-
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     price: req.body.price
   })
+  
   product
     .save()
     .then(result => {
