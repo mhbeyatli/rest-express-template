@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Product = require('../models/product')
 
 exports.get_all_products = (req, res, next) => {
+  res.status(200).json({message: 'this is message'})
   Product
     .find()
     .exec()
